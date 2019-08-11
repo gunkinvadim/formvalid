@@ -8,33 +8,26 @@ window.onload = function(e){
 
     form.onsubmit = function(){
 
+        var error = false;
+
         for (i = 0; i < inputs.length; i++) {
             if (inputs[i].value == '') {
-                event.preventDefault();
-                inputs[i].classList.add('errorInput');  
+                error = true;
+                inputs[i].classList.add('errorInput');
             } else {
                 inputs[i].classList.remove('errorInput');
             }
         }
 
-        for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].classList.contains('errorInput')) {
-                if (document.querySelector('.form-alert')) {
-                    break;
-                } else {
-                    var formAlert = document.createElement('p');
-                    formAlert.classList.add('form-alert');
-                    formAlert.innerHTML = 'Заполните все поля!';
-                    inputsContainer.append(formAlert);
-                    break;
-                } 
+        if (error) {
+            event.preventDefault();
+
+            if (!(document.querySelector('.form-alert'))) {
+                var formAlert = document.createElement('p');
+                formAlert.classList.add('form-alert');
+                formAlert.innerHTML = 'Заполните все поля!';
+                inputsContainer.append(formAlert);
             }
         }
     };
-
-    for (i = 0; i < inputs.length; i++) {
-        inputs[i].oninput = function() {
-            this.classList.remove('errorInput');
-        };
-    }
 };
