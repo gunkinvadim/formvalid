@@ -30,4 +30,10 @@ window.onload = function(e){
             }
         }
     };
+
+    for (i = 0; i < inputs.length; i++) {
+        inputs[i].oninput = function() {
+            this.classList.remove('errorInput');
+        };
+    }
 };
